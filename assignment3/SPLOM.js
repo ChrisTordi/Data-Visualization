@@ -48,9 +48,7 @@ function makePlot(xVal, yVal, data, id) {
 				.attr('class','label')
 				.attr('x', w/2)
 				.attr('y', h - 5)
-				.on('click', function() {
-					setXval(getNextVal(xVal));
-				});
+
 	yAxis = d3.svg.axis()
 				.scale(yScale)
 				.orient('left')
@@ -63,9 +61,10 @@ function makePlot(xVal, yVal, data, id) {
 				.attr('class','label')
 				.attr('x', yOffset/2)
 				.attr('y', h/2-10)
-				.on('click', function() {
-					setYval(getNextVal(yVal));
-				});
+
+	div = d3.select('body').append('div')
+				.attr('class', 'tooltip')
+				.style('opacity', 0);
 
 
 	// Now, we will start actually building our scatterplot!
@@ -73,13 +72,7 @@ function makePlot(xVal, yVal, data, id) {
 				.data(data);		// Bind data to elements
 
 	point.enter().append('svg:circle');
-			 	// Create new elements if needed
 
-	tooltip = svg.selectAll('circle')
-							 .append("div")
-							 .style("position", "absolute")
-							 .style("z-index", "10")
-							 .style("visibility", "hidden");
 	// Update our selection
 	point
 		.attr('class', 'point')									// Give it a class
@@ -87,10 +80,24 @@ function makePlot(xVal, yVal, data, id) {
             return xScale(d[xVal]);
         })	// x-coordinate
 		.attr('cy', function(d) { return yScale(d[yVal]); })	// y-coordinate
-		.style('fill','green')
+		.style('fill','black')
 		.style('stroke', 'none')
-		.on("mouseover", function(d) { highlightPoints(d, d3.select(this).style('fill'), 'red') })
-		.on("mouseout", function(d) { highlightPoints(d, d3.select(this).style('fill'), 'green') })
+		.on("mouseover", function(d) {
+			div.transition()
+				.duration(200)
+				.style('opacity', .9);
+			div.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
+				.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+			highlightPoints(d, d3.select(this).style('fill'), 'red')
+		})
+		.on("mouseout", function(d) {
+			div.transition()
+				.duration(400)
+				.style('opacity', 0);
+
+			highlightPoints(d, d3.select(this).style('fill'), 'black')
+		})
 		.on("click", function(d) { toggleHighlightPoints(d, d3.select(this).style('fill')) })
 		.attr('r', 0)
 		.transition()
@@ -105,9 +112,6 @@ function addLabel(label, id) {
 
 d3.csv('challenger.csv', function(csvData) {
 	data = csvData;
-	// It will be helpful to define scales that convert
-	// values from our data domain into screen coordinates.
-	// d3 has built-in functionality for creating these scales.
 	var id = 0;
 	for (var i  = 0; i < 5; i++) {
 		for (var j = 0; j < 5; j++) {
@@ -147,42 +151,3 @@ function highlightPoints(clickedPointData, color, newColor) {
 		}
 	}
 }
-
-// A function to retrieve the next value in the vals list
-function getNextVal(val) {
-	return vals[(vals.indexOf(val) + 1) % vals.length];
-};
-
-// A function to change what values we plot on the x-axis
-function setXval(val) {
-	// Update xVal
-	xVal = val;
-	// Update the axis
-	xScale.domain([d3.min(data, function(d) { return parseFloat(d[xVal]); })-1,
-				   d3.max(data, function(d) { return parseFloat(d[xVal]); })+1])
-	xAxis.scale(xScale);
-	xAxisG.call(xAxis);
-	xLabel.text(xVal);
-	// Update the points
-	d3.selectAll('.point')
-		.transition()
-		.duration(transDur)
-		.attr('cx', function(d) { return xScale(d[xVal]); });
-}
-
-// A function to change what values we plot on the y-axis
-function setYval(val) {
-	// Update yVal
-	yVal = val;
-	// Update the axis
-	yScale.domain([d3.min(data, function(d) { return parseFloat(d[yVal]); })-1,
-				   d3.max(data, function(d) { return parseFloat(d[yVal]); })+1])
-	yAxis.scale(yScale);
-	yAxisG.call(yAxis);
-	yLabel.text(yVal);
-	// Update the points
-	d3.selectAll('.point')
-		.transition()
-		.duration(transDur)
-		.attr('cy', function(d) { return yScale(d[yVal]); });
-};
