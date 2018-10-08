@@ -1,4 +1,9 @@
-// First, we will create some constants to define non-data-related parts of the visualization
+// Javascript file for SPLOM visualization
+// Authors: Eva Grench and Chris Tordi
+// Date: 10/7/18
+
+
+
 w = 300;			// Width of our visualization
 h = 200;			// Height of our visualization
 xOffset = 40;		// Space for x-axis labels
@@ -7,10 +12,7 @@ margin = 10;		// Margin around visualization
 transDur = 1500;	// Duration of transitions (in milliseconds)
 vals = ['flight_index','num_o_ring_distress','launch_temp','leak_check_pressure', 'tufte_metric', 'color']
 
-var div = d3.select('body').append('div')
-	.attr('class', 'tooltip')
-	.style('opacity', 0);
-
+//builds svg line plots
 function makePlot(xVal, yVal, data, id) {
 	console.log(id)
 	xScale = d3.scale.linear()
@@ -20,7 +22,7 @@ function makePlot(xVal, yVal, data, id) {
 	yScale = d3.scale.linear()
 				.domain([d3.min(data, function(d) { return parseFloat(d[yVal]); })-1,
 						 d3.max(data, function(d) { return parseFloat(d[yVal]); })+1])
-				.range([h - xOffset - margin, margin]); // Notice this is backwards!
+				.range([h - xOffset - margin, margin]);
 
 	svg = d3.select("#" + id).append('svg:svg')
 				.attr('width', w)
@@ -35,7 +37,7 @@ function makePlot(xVal, yVal, data, id) {
 			.style("fill", 'none')
 			.style("stroke-width", 1);
 
-	// Build axes! (These are kind of annoying, actually...)
+	// Build axes and labels
 	xAxis = d3.svg.axis()
 				.scale(xScale)
 				.orient('bottom')
@@ -67,7 +69,6 @@ function makePlot(xVal, yVal, data, id) {
 				.style('opacity', 0);
 
 
-	// Now, we will start actually building our scatterplot!
 	point = svg.selectAll('.point') // Select elements
 				.data(data);		// Bind data to elements
 
@@ -75,14 +76,12 @@ function makePlot(xVal, yVal, data, id) {
 
 	// Update our selection
 	point
-		.attr('class', 'point')									// Give it a class
-		.attr('cx', function(d) {
-            return xScale(d[xVal]);
-        })	// x-coordinate
+		.attr('class', 'point')
+		.attr('cx', function(d) { return xScale(d[xVal]);})	 	// x-coordinate
 		.attr('cy', function(d) { return yScale(d[yVal]); })	// y-coordinate
 		.style('fill','black')
 		.style('stroke', 'none')
-		.on("mouseover", function(d) {
+		.on("mouseover", function(d) { //display tool tip and highlight points
 			div.transition()
 				.duration(200)
 				.style('opacity', .9);
@@ -91,7 +90,7 @@ function makePlot(xVal, yVal, data, id) {
 				.style("top", (d3.event.pageY - 28) + "px");
 			highlightPoints(d, d3.select(this).style('fill'), 'red')
 		})
-		.on("mouseout", function(d) {
+		.on("mouseout", function(d) { //hide tool tip and unhighlight points
 			div.transition()
 				.duration(400)
 				.style('opacity', 0);
@@ -102,14 +101,16 @@ function makePlot(xVal, yVal, data, id) {
 		.attr('r', 0)
 		.transition()
 		.duration(transDur)
-		.attr('r', 3)									// radius
+		.attr('r', 3)
 }
 
+//Add labels to diagonal label slots
 function addLabel(label, id) {
 	console.log(id)
 	$("#" + id).append("<h4 style='text-align:center'>" + label + "</h4>")
 }
 
+// load csv and call function that generates svgs
 d3.csv('challenger.csv', function(csvData) {
 	data = csvData;
 	var id = 0;
@@ -125,6 +126,7 @@ d3.csv('challenger.csv', function(csvData) {
 	}
 });
 
+//toggle point color for all points with same flight index
 function toggleHighlightPoints(clickedPointData, color) {
 	console.log("current clicked color: " + color);
 	if (color == 'rgb(0, 255, 255)') {
@@ -134,6 +136,7 @@ function toggleHighlightPoints(clickedPointData, color) {
 	}
 }
 
+// loop through all points and changes points that share same flight index
 function highlightPoints(clickedPointData, color, newColor) {
 	console.log("current color: " + color);
 	console.log("new  color: " + newColor);
@@ -141,7 +144,7 @@ function highlightPoints(clickedPointData, color, newColor) {
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
 		for (j = 0; j < points[i].length; j++) {
-			if (points[i][j].__data__["flight_index"] == clickedPointData["flight_index"]) {
+			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"]) {
 				if (color == 'rgb(0, 255, 255)') {
 					points[i][j].style.fill = 'rgb(0, 255, 255)'
 				} else {
