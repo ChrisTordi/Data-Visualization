@@ -42,43 +42,51 @@ function makeBar(yVal, data, yOffset) {
 	point.enter().append('svg:circle');
 			 	// Create new elements if needed
 
-
-    // Update our selection
-  	point
-  		.attr('class', yVal)  // Give it a class
-  		.attr('cx', yOffset)	// x-coordinate
-  		.attr('cy', function(d) { return yScale(d[yVal]); })	// y-coordinate
-  		.style('fill','green')
-  		.style('stroke', 'none')
-  		.attr('r', 0)
-  		.transition()
-  		.duration(transDur)
-  		.attr('r', 3)
+  console.log("yOffset " + yOffset)
+  console.log("yVal " + yVal)
+  // Update our selection
+	point
+		.attr('class', yVal)  // Give it a class
+		.attr('cx', yOffset)	// x-coordinate
+		.attr('cy', function(d) { return yScale(d[yVal]); })	// y-coordinate
+		.style('fill','green')
+		.style('stroke', 'none')
+		.attr('r', 0)
+		.transition()
+		.duration(transDur)
+		.attr('r', 3);
 }
 
-function drawLines(startYVal, endYVal, startYOffset, endYOffset) {
-  startPoints = svg.selectAll('.' + startYVal);
-  endPoints = svg.selectAll('.' + endYVal);
-  console.log("startPoints[i][j].x " + startPoints[0][0].cx);
-  flight_index = 1
-	for (i = 0; i < startPoints.length; i++) {
-    for (j = 0; j < startPoints[i].length; j++) {
-      var line = svg.append("line")
-        .attr("x1", startPoints[i][j].cx)
-        .attr("y1", startPoints[i][j].cy)
-        .attr("x2", endPoints[i][j].cx)
-        .attr("y2", endPoints[i][j].cy)
-        .style('stroke', 'black');
-    }
-  }
-}
+function drawLines(yValStart, yValEnd, yOffsetStart, yOffsetEnd, data) {
+  yScaleStart = d3.scale.linear()
+  			.domain([d3.min(data, function(d) { return parseFloat(d[yValStart]); })-1,
+  					 d3.max(data, function(d) { return parseFloat(d[yValStart]); })+1])
+  			.range([h - margin, margin]); // Notice this is backwards!
 
-function makeLineData(data, flight_index, yOffset) {
-  lineData = []
-  points = svg.selectAll('circle')[0];
-  for (i = 0; i < points.length; i ++) {
-    lineData.append({'x': points[i].cx, 'y': points[i].__data__[]})
-  }
+yScaleEnd = d3.scale.linear()
+			.domain([d3.min(data, function(d) { return parseFloat(d[yValEnd]); })-1,
+					 d3.max(data, function(d) { return parseFloat(d[yValEnd]); })+1])
+			.range([h - margin, margin]); // Notice this is backwards!
+
+  line = svg.selectAll('.line' + yValStart)
+    .data(data)
+
+  console.log("yOffsetStart " + yOffsetStart)
+  console.log("yOffsetEnd " + yOffsetEnd)
+  console.log("yValStart " + yValStart)
+  console.log("yValEnd " + yValEnd)
+
+  line.enter().append('line')
+      .attr('class', 'line' + yValStart)
+      .attr("x1", yOffsetStart)
+      .attr("y1", function(d) {
+        console.log("d[yValStart] " + d[yValStart])
+        return yScaleStart(d[yValStart]); })
+      .attr("x2", yOffsetEnd)
+      .attr("y2", function(d) {
+        console.log("d[yValEnd] " + d[yValEnd])
+        return yScaleEnd(d[yValEnd]); })
+      .style('stroke', 'black');
 }
 
 d3.csv('challenger.csv', function(csvData) {
@@ -88,7 +96,7 @@ d3.csv('challenger.csv', function(csvData) {
   }
   for (i = 0; i < vals.length; i++) {
     if (i + 1 < vals.length) {
-      drawLines(vals[i], vals[i + 1], data, (i+1)*200, (i+2)*200);
+      drawLines(vals[i], vals[i + 1], (i+1)*200, (i+2)*200, data);
     }
   }
 });
