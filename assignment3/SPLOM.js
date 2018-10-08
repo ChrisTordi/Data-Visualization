@@ -88,7 +88,7 @@ function makePlot(xVal, yVal, data, id) {
 			div.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
 				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
-			highlightPoints(d, d3.select(this).style('fill'), 'red')
+			highlightPoints(d, d3.select(this).style('fill'), 'rgb(192,192,192)')
 		})
 		.on("mouseout", function(d) { //hide tool tip and unhighlight points
 			div.transition()
@@ -129,10 +129,17 @@ d3.csv('challenger.csv', function(csvData) {
 //toggle point color for all points with same flight index
 function toggleHighlightPoints(clickedPointData, color) {
 	console.log("current clicked color: " + color);
-	if (color == 'rgb(0, 255, 255)') {
-		highlightPoints(clickedPointData, 'clicked', 'black')
-	} else {
-		highlightPoints(clickedPointData, color, 'rgb(0, 255, 255)')
+	points = d3.selectAll('circle')
+	for (i = 0; i < points.length; i++) {
+		for (j = 0; j < points[i].length; j++) {
+			if (points[i][j].__data__["flight_index"] == clickedPointData["flight_index"]) {
+				if (points[i][j].style.fill == 'black') {
+					points[i][j].style.fill = 'red'
+				} else  {
+					points[i][j].style.fill = 'black'
+				}
+			}
+		}
 	}
 }
 
@@ -144,12 +151,14 @@ function highlightPoints(clickedPointData, color, newColor) {
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
 		for (j = 0; j < points[i].length; j++) {
-			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"]) {
-				if (color == 'rgb(0, 255, 255)') {
-					points[i][j].style.fill = 'rgb(0, 255, 255)'
+			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"] && points[i][j].style.fill != 'red') {
+				if (color == 'black') {
+					points[i][j].style.fill = 'rgb(192,192,192)'
 				} else {
 					points[i][j].style.fill = newColor
 				}
+			} else {
+				points[i][j].style.fill = 'black'
 			}
 		}
 	}
