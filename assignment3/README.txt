@@ -23,10 +23,17 @@ SPLOM:
 
 
 Parallel Coordinates: Our parallel coordinates visualization is made up of 5
-vertical bar. Each bar represents a column from our csv file.
+vertical bar. Each bar represents a column from our csv file with points placed
+along each bar according to their respective values. The lines serve to relate
+multiple data points from the same flight to allow viewers to discern
+relationships between the data.
 
+Hovering over a line highlights each line red and displays a tooltip for that
+specific flight. Moving the cursor off of the line will return the color to
+blue. Clicking a line will toggle each line for that flight and turn those lines
+red and increase line thickness. This will persist until one of the lines
+associated with that flight is clicked again.
 
-
-How to see your websites (i.e., which files to open in Chrome)
-How to read your visualizations. What animations/interactions does it contain?
-What purpose do they serve?
+The animations and interactions allow viewers to easily see relationships
+within a flight and compared to other flights. The coloring scheme also makes
+flights that are hovered over "pop-out"
