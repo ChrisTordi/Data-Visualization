@@ -69,7 +69,7 @@ tooltip = d3.select('body').append('div')
   			tooltip.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
   				.style("left", (d3.event.pageX) + "px")
   				.style("top", (d3.event.pageY - 28) + "px");
-        highlightLine(d, 'red');
+        highlightLine(d, 'Crimson');
       })
       .on("mouseout", function(d) {
   			tooltip.transition()
@@ -79,7 +79,7 @@ tooltip = d3.select('body').append('div')
   		})
       .on("click", function(d) {
         if (d3.select(this).style('stroke-width') == '2px') {
-          toggleLine(d, 'red', '5px')
+          toggleLine(d, 'Crimson', '5px')
         } else {
           toggleLine(d, 'SteelBlue', '2px')
         }
@@ -112,11 +112,9 @@ function highlightLine(selectedLineData, newColor) {
 d3.csv('challenger.csv', function(csvData) {
   data = csvData;
   for (i = 0; i < vals.length; i++) {
-    makeBar(vals[i], data , (i+1)*200);
-  }
-  for (i = 0; i < vals.length; i++) {
     if (i + 1 < vals.length) {
       drawLines(vals[i], vals[i + 1], (i+1)*200, (i+2)*200, data);
     }
+    makeBar(vals[i], data , (i+1)*200);
   }
 });
