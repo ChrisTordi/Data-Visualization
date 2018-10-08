@@ -128,7 +128,7 @@ d3.csv('challenger.csv', function(csvData) {
 function toggleHighlightPoints(clickedPointData, color) {
 	console.log("current clicked color: " + color);
 	if (color == 'rgb(0, 255, 255)') {
-		highlightPoints(clickedPointData, 'clicked', 'green')
+		highlightPoints(clickedPointData, 'clicked', 'black')
 	} else {
 		highlightPoints(clickedPointData, color, 'rgb(0, 255, 255)')
 	}
