@@ -125,7 +125,7 @@ d3.csv('challenger.csv', function(csvData) {
 	}
 });
 
-//toggle point color for all points with same flight index
+//toggle point color for all points with different flight index
 function toggleHighlightPoints(clickedPointData, color) {
 	console.log("current clicked color: " + color);
 	points = d3.selectAll('circle')
@@ -142,7 +142,7 @@ function toggleHighlightPoints(clickedPointData, color) {
 	}
 }
 
-// loop through all points and changes points that share same flight index
+// loop through all points and changes colors for points that have different flight index
 function highlightPoints(clickedPointData, color, newColor) {
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
@@ -153,6 +153,8 @@ function highlightPoints(clickedPointData, color, newColor) {
 				} else {
 					points[i][j].style.fill = newColor
 				}
+			} else if (points[i][j].style.fill == 'red'){
+				points[i][j].style.fill = 'red'
 			} else {
 				points[i][j].style.fill = 'black'
 			}
