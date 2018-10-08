@@ -26,7 +26,7 @@ function makePlot(xVal, yVal, data, id) {
 				.attr('width', w)
 				.attr('height', h)
 
- 	borderPath = svg.append("rect")
+ 	border = svg.append("rect")
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", h)
