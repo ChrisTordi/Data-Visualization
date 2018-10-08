@@ -1,9 +1,4 @@
-// Javascript file for SPLOM visualization
-// Authors: Eva Grench and Chris Tordi
-// Date: 10/7/18
-
-
-
+// First, we will create some constants to define non-data-related parts of the visualization
 w = 300;			// Width of our visualization
 h = 200;			// Height of our visualization
 xOffset = 40;		// Space for x-axis labels
@@ -21,7 +16,7 @@ function makePlot(xVal, yVal, data, id) {
 	yScale = d3.scale.linear()
 				.domain([d3.min(data, function(d) { return parseFloat(d[yVal]); })-1,
 						 d3.max(data, function(d) { return parseFloat(d[yVal]); })+1])
-				.range([h - xOffset - margin, margin]);
+				.range([h - xOffset - margin, margin]); // Notice this is backwards!
 
 	svg = d3.select("#" + id).append('svg:svg')
 				.attr('width', w)
@@ -36,7 +31,7 @@ function makePlot(xVal, yVal, data, id) {
 			.style("fill", 'none')
 			.style("stroke-width", 1);
 
-	// Build axes and labels
+	// Build axes! (These are kind of annoying, actually...)
 	xAxis = d3.svg.axis()
 				.scale(xScale)
 				.orient('bottom')
@@ -68,6 +63,7 @@ function makePlot(xVal, yVal, data, id) {
 				.style('opacity', 0);
 
 
+	// Now, we will start actually building our scatterplot!
 	point = svg.selectAll('.point') // Select elements
 				.data(data);		// Bind data to elements
 
@@ -75,8 +71,10 @@ function makePlot(xVal, yVal, data, id) {
 
 	// Update our selection
 	point
-		.attr('class', 'point')
-		.attr('cx', function(d) { return xScale(d[xVal]);})	 	// x-coordinate
+		.attr('class', 'point')									// Give it a class
+		.attr('cx', function(d) {
+            return xScale(d[xVal]);
+        })	// x-coordinate
 		.attr('cy', function(d) { return yScale(d[yVal]); })	// y-coordinate
 		.style('fill','black')
 		.style('stroke', 'none')
@@ -100,16 +98,14 @@ function makePlot(xVal, yVal, data, id) {
 		.attr('r', 0)
 		.transition()
 		.duration(transDur)
-		.attr('r', 3)
+		.attr('r', 3)									// radius
 }
 
-//Add labels to diagonal label slots
 function addLabel(label, id) {
 	console.log(id)
 	$("#" + id).append("<h4 style='text-align:center'>" + label + "</h4>")
 }
 
-// load csv and call function that generates svgs
 d3.csv('challenger.csv', function(csvData) {
 	data = csvData;
 	var id = 0;
@@ -125,21 +121,19 @@ d3.csv('challenger.csv', function(csvData) {
 	}
 });
 
-//toggle point color for all points with same flight index
 function toggleHighlightPoints(clickedPointData, color) {
 	if (color == 'rgb(0, 255, 255)') {
-		highlightPoints(clickedPointData, 'clicked', 'black')
+		highlightPoints(clickedPointData, 'clicked', 'green')
 	} else {
 		highlightPoints(clickedPointData, color, 'rgb(0, 255, 255)')
 	}
 }
 
-// loop through all points and changes points that share same flight index
 function highlightPoints(clickedPointData, color, newColor) {
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
 		for (j = 0; j < points[i].length; j++) {
-			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"]) {
+			if (points[i][j].__data__["flight_index"] == clickedPointData["flight_index"]) {
 				if (color == 'rgb(0, 255, 255)') {
 					points[i][j].style.fill = 'rgb(0, 255, 255)'
 				} else {
