@@ -5,11 +5,7 @@ xOffset = 40;		// Space for x-axis labels
 yOffset = 60;		// Space for y-axis labels
 margin = 10;		// Margin around visualization
 transDur = 1500;	// Duration of transitions (in milliseconds)
-vals = ['flight_index','num_o_ring_distress','launch_temp','leak_check_pressure', 'tufte_metric', 'color']
-
-var div = d3.select('body').append('div')
-	.attr('class', 'tooltip')
-	.style('opacity', 0);
+vals = ['flight_index','num_o_ring_distress','launch_temp','leak_check_pressure', 'tufte_metric']
 
 function makePlot(xVal, yVal, data, id) {
 	console.log(id)
@@ -62,7 +58,7 @@ function makePlot(xVal, yVal, data, id) {
 				.attr('x', yOffset/2)
 				.attr('y', h/2-10)
 
-	div = d3.select('body').append('div')
+	tooltip = d3.select('body').append('div')
 				.attr('class', 'tooltip')
 				.style('opacity', 0);
 
@@ -83,16 +79,16 @@ function makePlot(xVal, yVal, data, id) {
 		.style('fill','black')
 		.style('stroke', 'none')
 		.on("mouseover", function(d) {
-			div.transition()
+			tooltip.transition()
 				.duration(200)
 				.style('opacity', .9);
-			div.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
+			tooltip.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
 				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
 			highlightPoints(d, d3.select(this).style('fill'), 'red')
 		})
 		.on("mouseout", function(d) {
-			div.transition()
+			tooltip.transition()
 				.duration(400)
 				.style('opacity', 0);
 
@@ -126,7 +122,6 @@ d3.csv('challenger.csv', function(csvData) {
 });
 
 function toggleHighlightPoints(clickedPointData, color) {
-	console.log("current clicked color: " + color);
 	if (color == 'rgb(0, 255, 255)') {
 		highlightPoints(clickedPointData, 'clicked', 'green')
 	} else {
@@ -135,9 +130,6 @@ function toggleHighlightPoints(clickedPointData, color) {
 }
 
 function highlightPoints(clickedPointData, color, newColor) {
-	console.log("current color: " + color);
-	console.log("new  color: " + newColor);
-
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
 		for (j = 0; j < points[i].length; j++) {
