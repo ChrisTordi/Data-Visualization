@@ -85,9 +85,9 @@ function makePlot(xVal, yVal, data, id) {
 				.duration(200)
 				.style('opacity', .9);
 			tooltip.html('<p> Flight Index <br>' + d["flight_index"] + '</p>')
-				.style("left", (d3.event.pageX + 5) + "px")
+				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
-			highlightPoints(d, d3.select(this).style('fill'), 'rgb(192,192,192)')
+			highlightPoints(d, d3.select(this).style('fill'), 'red')
 		})
 		.on("mouseout", function(d) {
 			tooltip.transition()
@@ -125,7 +125,7 @@ d3.csv('challenger.csv', function(csvData) {
 	}
 });
 
-//toggle point color for all points with different flight index
+//toggle point color for all points with same flight index
 function toggleHighlightPoints(clickedPointData, color) {
 	console.log("current clicked color: " + color);
 	points = d3.selectAll('circle')
@@ -142,21 +142,17 @@ function toggleHighlightPoints(clickedPointData, color) {
 	}
 }
 
-// loop through all points and changes colors for points that have different flight index
+// loop through all points and changes points that share same flight index
 function highlightPoints(clickedPointData, color, newColor) {
 	points = d3.selectAll('circle')
 	for (i = 0; i < points.length; i++) {
 		for (j = 0; j < points[i].length; j++) {
-			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"] && points[i][j].style.fill != 'red') {
-				if (color == 'black') {
-					points[i][j].style.fill = 'rgb(192,192,192)'
-				} else {
-					points[i][j].style.fill = newColor
-				}
-			} else if (points[i][j].style.fill == 'red'){
+			if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"] && points[i][j].style.fill == 'red') {
+				points[i][j].style.fill = 'red'
+			} else if (points[i][j].__data__["flight_index"] != clickedPointData["flight_index"]) {
 				points[i][j].style.fill = 'red'
 			} else {
-				points[i][j].style.fill = 'black'
+				points[i][j].style.fill = 'rgb(192,192,192)'
 			}
 		}
 	}
