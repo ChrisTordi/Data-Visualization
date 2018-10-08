@@ -96,13 +96,13 @@ function drawLines(yValStart, yValEnd, barPositionStart, barPositionEnd, data) {
 }
 
 // changes visual data of line when clicked
-function toggleLine(selectedLineData, newColor, newThickness) {
+function toggleLine(selectedLineData, newColor, newThiccness) {
   lines = d3.selectAll('line')
   for (i = 0; i < lines.length; i++) {
     for (j = 0; j < lines[i].length; j++) {
       if (lines[i][j].__data__["flight_index"] == selectedLineData["flight_index"]) {
         lines[i][j].style.stroke = newColor
-        lines[i][j].style.strokeWidth = newThickness
+        lines[i][j].style.strokeWidth = newThiccness
       }
     }
   }
