@@ -125,7 +125,7 @@ d3.csv('challenger.csv', function(csvData) {
   data = csvData;
   for (i = 0; i < vals.length; i++) {
     if (i + 1 < vals.length) {
-      drawLines(vals[i], vals[i + 1], (i+1)*200, (i+2)*200, data);
+      drawLines(vals[i], vals[i + 1] , (i+1)*200, (i+2)*200, data);
     }
     makeBar(vals[i], data , (i+1)*200);
   }
