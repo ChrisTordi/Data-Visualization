@@ -75,7 +75,7 @@ function drawLines(yValStart, yValEnd, barPositionStart, barPositionEnd, data) {
         .attr("y2", function(d) { return yScaleEnd(d[yValEnd]); })
         .style('stroke', function(d) {
             if (d["Spouse"] == 1.0) {
-                return "#a6cee3"
+                return "#fb9a99"
             } else if (d["Spouse"] == 2.0) {
                 return "#1f78b4"
             } else if (d["Spouse"] == 3.0){
