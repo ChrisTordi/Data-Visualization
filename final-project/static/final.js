@@ -9,6 +9,6 @@ var vis = d3.select("#parsets").append("svg")
     .attr("width", chart.width())
     .attr("height", chart.height());
 
-d3.csv("output_data.csv", function(error, csv) {
+d3.csv("/static/output_data.csv", function(error, csv) {
   vis.datum(csv).call(chart);
 });
