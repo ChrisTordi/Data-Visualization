@@ -1,8 +1,8 @@
 <html>
 <head>
 <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-<script src="http://www.jasondavies.com/parallel-sets/d3.parsets.js"></script>
 <script src="http://www.jasondavies.com/parallel-sets/highlight.min.js"></script>
+<script type="text/javascript" src="{{ url_for("static", filename="d3.parsets.js") }}"></script>
 
 <title>Final Project Visualization</title>
 </head>
@@ -75,6 +75,6 @@ pre, code { font-family: "Menlo", monospace; }
 </style>
 <body>
   <div id="parsets", class = "svg"></div>
-  <script type="text/javascript" src="final.js"></script>
+  <script type="text/javascript" src="{{ url_for("static", filename="final.js") }}"></script>
 </body>
 </html>
