@@ -5,7 +5,7 @@
 var chart = d3.parsets()
       .dimensions(["JobSatisfaction", "Gender", "CompanySize", "Hobby"]);
 
-var vis = d3.select("#vis").append("svg")
+var vis = d3.select("#parsets").append("svg")
     .attr("width", chart.width())
     .attr("height", chart.height());
 
