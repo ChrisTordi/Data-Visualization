@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script src="http://www.jasondavies.com/parallel-sets/highlight.min.js"></script>
+<script type="text/javascript" src="{{ url_for("static", filename="d3.parsets.js") }}"></script>
+<link rel="stylesheet" type="text/css" href="../static/styles.css">
+
+<title>Final Project Visualization</title>
+</head>
+<style>
+@import url(http://www.jasondavies.com/parallel-sets/d3.parsets.css);
+
+
+</style>
+<body>
+  <div id="parsets", class = "svg"></div>
+  <script type="text/javascript" src="{{ url_for("static", filename="final.js") }}"></script>
+  <script>
+    constructVis('{{ v1 }}', '{{ v2 }}','{{ v3 }}');
+  </script>
+</body>
+</html>
