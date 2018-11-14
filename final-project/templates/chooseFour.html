@@ -4,6 +4,16 @@
 <script src="http://www.jasondavies.com/parallel-sets/highlight.min.js"></script>
 <script type="text/javascript" src="{{ url_for("static", filename="d3.parsets.js") }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="styles.css") }}">
+<script src="jquery-3.3.1.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>Final Project Visualization</title>
 </head>
@@ -13,7 +23,41 @@
 
 </style>
 <body>
-  <div id="parsets", class = "svg"></div>
+    <div class="container">
+        <div class="row">
+            <div id="parsets", class = "svg" style="width:50%;margin: 0 auto;"></div>
+        </div>
+        <div class="row">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="JobSatisfaction" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Job Satisfaction
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Gender" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">
+              Gender
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="OpenSource" id="defaultCheck3">
+            <label class="form-check-label" for="defaultCheck3">
+              Open Source
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Hobby" id="defaultCheck4">
+            <label class="form-check-label" for="defaultCheck4">
+              Hobby
+            </label>
+          </div>
+          <div class="attribute-list">
+          </div>
+        </div>
+    </div>
+
+
   <script type="text/javascript" src="{{ url_for("static", filename="final.js") }}"></script>
   <script>
     constructVis('{{ v1 }}', '{{ v2 }}','{{ v3 }}', '{{ v4 }}');
