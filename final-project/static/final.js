@@ -24,16 +24,30 @@ $(document).ready(function() {
 });
 
 function scanCheckBoxes(attributeID) {
-    if (attributeID.is(":checked")) {
+    if (attributeID.is(":checked") && attributesToShow.length < 6) {
         attributesToShow.push(attributeID.val());
-        $(".attribute-list").append("<p>hello</p>")
+        $(".attribute-list").append("<p id=" + attributeID.val() + ">" + $(attributeID).attr("name") + "</p>")
+    } else if (attributesToShow.length == 5) {
+        disableSubmitButton()
     } else {
-        //remove from list
-        console.log(attributesToShow)
         var index = attributesToShow.indexOf(attributeID.val());
-        if (index !== -1) array.splice(index, 1);
+        if (index !== -1) attributesToShow.splice(index, 1);
+        $("#" + attributeID.val()).remove();
+    }
+}
 
-        
-        // remove from html div
-        }
+function disableSubmitButton() {
+  console.log('here')
+}
+
+function enableSubmitButton() {
+  console.log('here')
+}
+
+function submitAttributes() {
+    urlString = "http://localhost:5000";
+    for (var i = 0; i < attributesToShow.length; i++) {
+      urlString = urlString + "/" + attributesToShow[i]
+    }
+    window.location.replace(urlString);
 }
