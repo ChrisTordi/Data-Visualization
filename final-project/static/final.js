@@ -24,10 +24,10 @@ $(document).ready(function() {
 });
 
 function scanCheckBoxes(attributeID) {
-    if (attributeID.is(":checked") && attributesToShow.length < 6) {
+    if (attributeID.is(":checked") && attributesToShow.length < 2) {
         attributesToShow.push(attributeID.val());
         $(".attribute-list").append("<p id=" + attributeID.val() + ">" + $(attributeID).attr("name") + "</p>")
-    } else if (attributesToShow.length == 5) {
+    } else if (attributesToShow.length >= 3) {
         disableSubmitButton()
     } else {
         var index = attributesToShow.indexOf(attributeID.val());
@@ -37,11 +37,11 @@ function scanCheckBoxes(attributeID) {
 }
 
 function disableSubmitButton() {
-  console.log('here')
+  document.getElementById("submit-button").disabled = true;
 }
 
 function enableSubmitButton() {
-  console.log('here')
+  document.getElementById("submit-button").disabled = false;
 }
 
 function submitAttributes() {
