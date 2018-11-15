@@ -27,35 +27,115 @@
         <div class="row">
             <div id="parsets", class = "svg" style="width:50%;margin: 0 auto;"></div>
         </div>
-        <div class="row">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="JobSatisfaction" id="defaultCheck1" name="Job Satisfaction">
-            <label class="form-check-label" for="defaultCheck1">
-              Job Satisfaction
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Gender" id="defaultCheck2" name="Gender">
-            <label class="form-check-label" for="defaultCheck2">
-              Gender
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="OpenSource" id="defaultCheck3" name="Open Source">
-            <label class="form-check-label" for="defaultCheck3">
-              Open Source
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Hobby" id="defaultCheck4" name="Hobby">
-            <label class="form-check-label" for="defaultCheck4">
-              Hobby
-            </label>
-          </div>
-          <div class="attribute-list">
-          </div>
-          <button id="submit-button" onclick="submitAttributes()">
-          </button>
+        <div class="row well">
+            <div class="col-xs-3">
+                <p style="text-align:center;">Health</p>
+                <hr>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Exercise" id="defaultCheck1" name="Exercise">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Exercise
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="SkipMeals" id="defaultCheck2" name="Skip Meals">
+                    <label class="form-check-label" for="defaultCheck2">
+                      Skip Meals
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="HoursOutside" id="defaultCheck3" name="Hours Outside">
+                    <label class="form-check-label" for="defaultCheck3">
+                      Hours Outside
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="HoursComputer" id="defaultCheck4" name="Hours at Computer">
+                    <label class="form-check-label" for="defaultCheck4">
+                      Hours at Computer
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Hobby" id="defaultCheck5" name="Hobby">
+                    <label class="form-check-label" for="defaultCheck5">
+                      Hobby
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <p style="text-align:center;">Job</p>
+                <hr>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="JobSatisfaction" id="defaultCheck6" name="Job Satisfaction">
+                    <label class="form-check-label" for="defaultCheck6">
+                        Job Satisfaction
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="CompanySize" id="defaultCheck7" name="Company Size">
+                    <label class="form-check-label" for="defaultCheck7">
+                        Company Size
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="OpenSource" id="defaultCheck8" name="Open Source">
+                    <label class="form-check-label" for="defaultCheck8">
+                        Open Source
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="NumberMonitors" id="defaultCheck9" name="Number of Monitors">
+                    <label class="form-check-label" for="defaultCheck9">
+                        Number of Monitors
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="EthicsChoice" id="defaultCheck10" name="Ethics Choice">
+                    <label class="form-check-label" for="defaultCheck10">
+                        Ethics Choice
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <p style="text-align:center;">Demographics</p>
+                <hr>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Gender" id="defaultCheck11" name="Gender">
+                    <label class="form-check-label" for="defaultCheck11">
+                        Gender
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Age" id="defaultCheck12" name="Age">
+                    <label class="form-check-label" for="defaultCheck12">
+                        Age
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="RaceEthnicity" id="defaultCheck13" name="Race and RaceEthnicity">
+                    <label class="form-check-label" for="defaultCheck13">
+                        Race and Ethnicity
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="FormalEducation" id="defaultCheck14" name="Education">
+                    <label class="form-check-label" for="defaultCheck14">
+                        Education
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="ConvertedSalary" id="defaultCheck15" name="Salary">
+                    <label class="form-check-label" for="defaultCheck15">
+                        Salary
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <p style="text-align:center"> Attribute Queue </p>
+                <hr>
+                <div class="attribute-list" style="height:150px;text-align:center;"></div>
+                    <button id="submit-button" type="button" class="btn btn-primary" onclick="submitAttributes()" style="width: 50%;display:block;margin:0 auto;">Submit</button>
+            </div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-Gender,JobSatisfaction,ConvertedSalary,FormalEducation,CompanySize,Hobby,SkipMeals,HoursComputer,HoursOutside,OpenSource,Age,RaceEthnicity,NumberMonitors,EthicsChoice,Exercise
+Gender,JobSatisfaction,ConvertedSalary,FormalEducation,CompanySize,Hobby,SkipMeals,HoursComputer,HoursOutside,OpenSource,Age,RaceEthnicity,NumberMonitors,EthicsChoiceExer,Exercise
 Male,Neutral,120000,Some college/university study without earning a degree,"10,000 or more employees",Yes,1 - 2 times per week,Over 12 hours,Less than 30 minutes,Yes,18 - 24 years old,White or of European descent,2,Depends on what it is,I don't typically exercise
 Male,Satisfied,250000,Some college/university study without earning a degree,100 to 499 employees,Yes,1 - 2 times per week,9 - 12 hours,Less than 30 minutes,Yes,35 - 44 years old,White or of European descent,1,No,I don't typically exercise
 Non-Binary,Neutral,75000,Some college/university study without earning a degree,10 to 19 employees,Yes,Daily or almost every day,5 - 8 hours,Less than 30 minutes,No,45 - 54 years old,White or of European descent,3,No,I don't typically exercise
