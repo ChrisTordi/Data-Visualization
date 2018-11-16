@@ -2,6 +2,7 @@
 // Authors: Eva Grench, Ethan Cassel-Mace, Chris Tordi
 // Date: 11/19/18
 var attributesToShow = [];
+var checkedBoxes = 0;
 
 function constructVis(){
     var args = Array.prototype.slice.call(arguments);
@@ -24,25 +25,33 @@ $(document).ready(function() {
 });
 
 function scanCheckBoxes(attributeID) {
+    // There is space to add another attribute to show
     if (attributeID.is(":checked") && attributesToShow.length < 5) {
-        enableSubmitButton();
         attributesToShow.push(attributeID.val());
-        $(".attribute-list").append("<p id=" + attributeID.val() + ">" + $(attributeID).attr("name") + "</p>")
-    } else if (attributesToShow.length >= 6) {
-        disableSubmitButton()
-    } else {
+        $(".attribute-list").append("<p id=" + attributeID.val() + ">" + $(attributeID).attr("name") + "</p>");
+        checkedBoxes++;
+        
+    // An attribute was unchecked
+    } else if (!attributeID.is(":checked")) {
         var index = attributesToShow.indexOf(attributeID.val());
         if (index !== -1) attributesToShow.splice(index, 1);
         $("#" + attributeID.val()).remove();
+        checkedBoxes--;
+        
+    // There is not space to add another attribute, but it was checked
+    } else if (attributeID.is(":checked")) {
+        checkedBoxes++;
     }
+    
+    toggleSubmitButtonDisabled(); 
 }
 
-function disableSubmitButton() {
-  $('#submit-button').prop('disabled', true);
-}
-
-function enableSubmitButton() {
-  $('#submit-button').prop('disabled', false);
+function toggleSubmitButtonDisabled() {
+    if (checkedBoxes >= 6) {
+        $('#submit-button').prop('disabled', true);
+    } else if (checkedBoxes < 6) {
+        $('#submit-button').prop('disabled', false);
+    }
 }
 
 function submitAttributes() {
