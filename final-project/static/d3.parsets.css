@@ -27,7 +27,8 @@
 .category-9 { fill: #17becf; stroke: #17becf; }
 
 .tooltip {
-  background-color: rgba(242, 242, 242, .6);
-  position: absolute;
-  padding: 5px;
+  background-color: rgba(242, 242, 242, .6) !important;
+  position: absolute !important;
+  padding: 5px !important;
+  opacity: 1 !important;
 }
