@@ -655,12 +655,14 @@
 
   function defaultTooltip(d) {
     var count = d.count,
-        path = [];
+        path = [],
+        parentCount = d.parent.count,
+        name = d.name;
     while (d.parent) {
       if (d.name) path.unshift(d.name);
       d = d.parent;
     }
-    return path.join(" → ") + "<br>" + comma(count) + " (" + percent(count / d.count) + ")";
+    return path.join(" → ") + "<br>" + " is " + percent(count / parentCount) + " of " + path.slice(0, path.length - 1).join(" → ") + "<br>";
   }
 
   function defaultCategoryTooltip(d) {
