@@ -47,7 +47,7 @@ function scanCheckBoxes(attributeID) {
 }
 
 function toggleSubmitButtonDisabled() {
-    if (checkedBoxes >= 6) {
+    if (checkedBoxes >= 6 || checkedBoxes <= 1) {
         $('#submit-button').prop('disabled', true);
     } else if (checkedBoxes < 6) {
         $('#submit-button').prop('disabled', false);

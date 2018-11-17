@@ -31,7 +31,7 @@
         </div>
         <div class="row well" style="width:960px; position:absolute; left:308px">
             <div class="col-xs-3">
-                <p style="text-align:center;">Health</p>
+                <p style="text-align:left;">Health</p>
                 <hr>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="Exercise" id="defaultCheck1" name="Exercise">
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="col-xs-3">
-                <p style="text-align:center;">Job</p>
+                <p style="text-align:left;">Job</p>
                 <hr>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="JobSatisfaction" id="defaultCheck6" name="Job Satisfaction">
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="col-xs-3">
-                <p style="text-align:center;">Demographics</p>
+                <p style="text-align:left;">Demographics</p>
                 <hr>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="Gender" id="defaultCheck11" name="Gender">
@@ -111,12 +111,6 @@
                     <input class="form-check-input" type="checkbox" value="Age" id="defaultCheck12" name="Age">
                     <label class="form-check-label" for="defaultCheck12">
                         Age
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="RaceEthnicity" id="defaultCheck13" name="Race and RaceEthnicity">
-                    <label class="form-check-label" for="defaultCheck13">
-                        Race and Ethnicity
                     </label>
                 </div>
                 <div class="form-check">
@@ -138,6 +132,7 @@
                 <div class="attribute-list" style="height:150px;text-align:center;"></div>
                     <button id="submit-button" type="button" class="btn btn-primary" onclick="submitAttributes()" style="width: 50%;display:block;margin:0 auto;">Submit</button>
             </div>
+                <p style="width:700px; position:absolute; bottom:6px; left:35px;">To learn more about software developers and their jobs, select between 2 and 5 attributes above and click<br>Submit.The order they appear in the attribute queue will be the order they are displayed in the visualization.</p>
         </div>
     </div>
   <script type="text/javascript" src="{{ url_for("static", filename="final.js") }}"></script>
