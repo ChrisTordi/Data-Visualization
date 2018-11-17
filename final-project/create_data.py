@@ -17,6 +17,22 @@ required_fields = ['Gender',
                    'EthicsChoice',
                    'Exercise']
 
+new_field_names = ['Gender',
+                   'Job Satisfaction',
+                   'Salary (USD)',
+                   'Highest Level of Education',
+                   'Company Size',
+                   'Codes as a Hobby',
+                   'Meals Skipped per Week',
+                   'Hours at a Computer per Day',
+                   'Hours Outside per Day',
+                   'Contributes to Open Source Projects',
+                   'Age',
+                   'RaceEthnicity',
+                   'Number of Monitors used',
+                   'Considers Ethics to be an Important Consideration',
+                   'Exercise per Week']
+
 value_mappings = {'Extremely satisfied': 'Satisfied',
                   'Moderately satisfied': 'Satisfied',
                   'Slightly satisfied': 'Neutral',
@@ -98,10 +114,10 @@ def bucketize_hours_outside(value):
 
 def bucketize_age(value):
     age_mapping = {'55 - 64 years old': '45 years or older',
-                   '18 - 24 years old': '0 - 18 years',
+                   '18 - 24 years old': '0 - 24 years old',
                    '65 years or older': '45 years or older',
                    '25 - 34 years old': '25 - 34 years old',
-                   'Under 18 years old': '0 - 18 years',
+                   'Under 18 years old': '0 - 24 years old',
                    '35 - 44 years old': '35 - 44 years old',
                    '45 - 54 years old': '45 years or older'}
     return age_mapping[value]
@@ -168,7 +184,7 @@ with open('survey_results_public.csv', encoding='utf8') as csv_file:
     with open('static/output_data.csv', 'w', encoding='utf8') as output_file:
         csv_reader = csv.DictReader(csv_file)
         csv_writer = csv.writer(output_file)
-        csv_writer.writerow(required_fields)  # write header
+        csv_writer.writerow(new_field_names)  # write header
         for row in csv_reader:
             new_row = create_new_row(row)
             if new_row:
