@@ -4,8 +4,46 @@
 var attributesToShow = [];
 var checkedBoxes = 0;
 
+var originalNames = ['Gender',
+                   'JobSatisfaction',
+                   'ConvertedSalary',
+                   'FormalEducation',
+                   'CompanySize',
+                   'Hobby',
+                   'SkipMeals',
+                   'HoursComputer',
+                   'HoursOutside',
+                   'OpenSource',
+                   'Age',
+                   'RaceEthnicity',
+                   'NumberMonitors',
+                   'EthicsChoice',
+                   'Exercise'];
+var newNames = ['Gender',
+                   'Job Satisfaction',
+                   'Salary (USD)',
+                   'Highest Level of Education',
+                   'Company Size',
+                   'Codes as a Hobby',
+                   'Meals Skipped per Week',
+                   'Hours at a Computer per Day',
+                   'Hours Outside per Day',
+                   'Contributes to Open Source Projects',
+                   'Age',
+                   'RaceEthnicity',
+                   'Number of Monitors used',
+                   'Considers Ethics to be an Important Consideration',
+                   'Exercise per Week'];
+
+var nameMappings = [];
+for (let i = 0; i < originalNames.length; i++) {
+    nameMappings.push([originalNames[i], newNames[i]]);
+}
+
 function constructVis(){
-    var args = Array.prototype.slice.call(arguments);
+    var nameMap = new Map(nameMappings);
+    var newArguments = Array.from(arguments).map( function(key, i) {return nameMap.get(key);});
+    var args = Array.prototype.slice.call(newArguments);
     var chart = d3.parsets()
           .dimensions(args);
 
