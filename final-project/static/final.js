@@ -32,7 +32,7 @@ var newNames = ['Gender',
                    'Age',
                    'RaceEthnicity',
                    'Number of Monitors used',
-                   'Considers Ethics to be an Important Consideration',
+                   'Would Work on Unethical Product if Asked',
                    'Exercise per Week'];
 
 var nameMappings = [];

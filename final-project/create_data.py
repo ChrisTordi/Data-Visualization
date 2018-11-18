@@ -30,7 +30,7 @@ new_field_names = ['Gender',
                    'Age',
                    'RaceEthnicity',
                    'Number of Monitors used',
-                   'Considers Ethics to be an Important Consideration',
+                   'Would Work on Unethical Product if Asked',
                    'Exercise per Week']
 
 value_mappings = {'Extremely satisfied': 'Satisfied',
@@ -139,6 +139,10 @@ def bucketize_exercise(value):
     elif value[0] == 'D':
         return '> 4 times per week'
     return value
+
+
+def bucketize_ethics(value):
+    pass
 
 
 def aggregate_data(field, value):
