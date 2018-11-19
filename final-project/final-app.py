@@ -43,11 +43,10 @@ def chooseTwo(v1,v2):
 @app.route('/')
 def default():
     return render_template(
-            'chooseFour.html',
+            'chooseThree.html',
             v1='JobSatisfaction',
-            v2='Gender',
-            v3='OpenSource',
-            v4='Hobby')
+            v2='FormalEducation',
+            v3='ConvertedSalary')
 
 
 if __name__=='__main__':
